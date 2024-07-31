@@ -1,0 +1,66 @@
+
+###
+POST https://keycloak.serverconsigov.com/realms/consigov/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=client-nest
+&client_secret=JsuH0rpxfEjX4UNrvnDkblvDjEO0Ln9B
+&grant_type=password
+&username=ally.cardoso
+&password=Arthur@2014
+&scope=openid
+  
+
+###
+GET https://keycloak.serverconsigov.com/auth/admin/realms/consigov/events
+Content-Type: application/json 
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJXSklFWDVvbThsUnd2ZDRacVowU0ttMnpKaGQwYnFnSXZsR3ZjWVNacGhjIn0.eyJleHAiOjE3MTY5NDIyNjIsImlhdCI6MTcxNjkzOTU2MiwianRpIjoiMDZkMWExZGQtZDlhMi00NzhhLWI4MWItMjNlMGFlMTA2M2I5IiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay5zZXJ2ZXJjb25zaWdvdi5jb20vcmVhbG1zL2NvbnNpZ292IiwiYXVkIjpbInJlYWxtLW1hbmFnZW1lbnQiLCJhY2NvdW50Il0sInN1YiI6IjZhOTc2OWM2LTI4MDctNDM3MC1iN2E2LTlkMDNlZTZiNWE2OSIsInR5cCI6IkJlYXJlciIsImF6cCI6ImNsaWVudC1uZXN0Iiwic2Vzc2lvbl9zdGF0ZSI6ImVjMDMyOWY1LTU0OTEtNDY3NC04OTA0LTBlZDBiNDU5YjQ1OSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJkZWZhdWx0LXJvbGVzLWNvbnNpZ292IiwiQURNSU4iLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7InJlYWxtLW1hbmFnZW1lbnQiOnsicm9sZXMiOlsibWFuYWdlLXVzZXJzIiwidmlldy11c2VycyIsInF1ZXJ5LWdyb3VwcyIsInF1ZXJ5LXVzZXJzIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIHN1YmRvbWFpbiBlbWFpbCByb2xlIGF2YXRhcl91cmwgZ3JvdXAgdW5pZGFkZSBjb25zaWduYXRhcmlhIGFkZHJlc3MiLCJzaWQiOiJlYzAzMjlmNS01NDkxLTQ2NzQtODkwNC0wZWQwYjQ1OWI0NTkiLCJyb2xlIjoiQURNSU4iLCJhZGRyZXNzIjp7fSwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJ1bmlkYWRlIjpbeyJ2YWx1ZSI6ImNsdGdocmd4OTAwMDExMm5rM2FrZ3YwMWQiLCJsYWJlbCI6IlVuaWRhZGUgZGUgw5NiZG9zIn0seyJ2YWx1ZSI6ImNsdWtqbHF4cDAwMDBpazlpbmY2N2dsMWYiLCJsYWJlbCI6IlVuaWRhZGUgZGUgQWJhZXRldHViYSJ9XSwicHJlZmVycmVkX3VzZXJuYW1lIjoiYWxseS5jYXJkb3NvIiwibG9jYWxlIjoicHQtQlIiLCJnaXZlbl9uYW1lIjoiYWxseSIsImF2YXRhcl91cmwiOiJodHRwczovL3ZlbWNhcmQuY29tLmJyL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDIyLzA4L3NlbS10aXR1bG8tNC5wbmciLCJjb25zaWduYXRhcmlhIjpbeyJpZCI6IjA5OTkiLCJkZXNjcmljYW8iOiJWRU1DQVJEIiwibm9tZSI6IlZFTUNBUkQifV0sIm5hbWUiOiJhbGx5IGNhcmRvc28iLCJzdWJkb21haW4iOiJjbHRnaHJneDkwMDAxMTJuazNha2d2MDFkIiwiZmFtaWx5X25hbWUiOiJjYXJkb3NvIiwiZW1haWwiOiJhbGx5Y2FyZG9zb2Rlc2lnbmVyQGdtYWlsLmNvbSJ9.MGd_aU89fS2uXu1o8VxTOaBaq_svbJKVgDk4OcA4ExFzpDxw5T9BadIWKKXuYFy8eJBRUDoqwhi-JANVmjwGUQlk8TrbVzCQ9QUmFx6mCDQ-rPjdX-UMQ4HuMEdeIAqq6Np-X-3oEbUV9R1RjPcoQEMkIfxps1hMref0ye8XwdA-KgdB5buBUs_23Q_StcLkLPW0_PpZ0GFaGB3VZ46oOrjATKw2wgQ8SQ3uD3wmRzQK6PBN6EJETCuGB-AfsolT5DIAyVqmncoVhdihftpTkZucPWBqu29CiXhRL0gak7z_lh872o_dxgVULzp-CGoT7kiUSQiak9G4J9MIlSJ2DA
+
+ 
+
+###
+POST http://localhost:3000/ocorrencia/send-data
+Content-Type: application/json
+
+[
+  {
+    "id": "496539",
+    "pesid": "1082245.0",
+    "data_inversa": "2023-12-05",
+    "dia_semana": "terca",
+    "horario": "03:00:00",
+    "uf": "PA",
+    "br": "316.0",
+    "municipio": "BELEM - MAX TESTE",
+    "causa_principal": "Sim",
+    "causa_acidente": "Ausência de reação do condutor",
+    "ordem_tipo_acidente": "5",
+    "tipo_acidente": "Tombamento",
+    "classificacao_acidente": "Com Vítimas LEVES",
+    "fase_dia": "Plena Noite",
+    "sentido_via": "Crescente",
+    "condicao_metereologica": "Céu Claro",
+    "tipo_pista": "Simples",
+    "tracado_via": "Reta",
+    "uso_solo": "Não",
+    "id_veiculo": "872999",
+    "tipo_veiculo": "Motocicleta",
+    "marca": "GOL",
+    "ano_fabricacao_veiculo": 2023,
+    "tipo_envolvido": "Condutor",
+    "estado_fisico": "Lesões Graves",
+    "idade": "38.0",
+    "sexo": "Masculino",
+    "ilesos": "0",
+    "feridos_leves": "0",
+    "feridos_graves": "1",
+    "mortos": "0",
+    "latitude": "-1,308708",
+    "longitude": "-48,458179",
+    "regional": "SPRF-PA",
+    "delegacia": "DEL01-PA",
+    "uop": "UOP02-DEL01-PA"
+  }
+]
+
+ 
