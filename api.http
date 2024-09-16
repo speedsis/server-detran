@@ -70,7 +70,7 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:3001/orders/
+GET https://detran-server-146b2f942a9b.herokuapp.com/orders/
  
 ###
 POST http://localhost:3000/orders/insert

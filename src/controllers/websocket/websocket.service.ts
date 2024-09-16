@@ -11,7 +11,7 @@ export class WebSocketService {
   async getOrders() {
     this.logger.log('Fetching orders...');
     return this.httpService
-      .get('http://localhost:3000/orders')
+      .get('https://detran-server-146b2f942a9b.herokuapp.com/orders')
       .pipe(map((response) => response.data))
       .toPromise(); // Para usar async/await
   }
@@ -20,7 +20,7 @@ export class WebSocketService {
   async getCalls() {
     this.logger.log('Fetching calls...');
     return this.httpService
-      .get('http://localhost:3000/calls')
+      .get('https://detran-server-146b2f942a9b.herokuapp.com/calls')
       .pipe(map((response) => response.data))
       .toPromise(); // Para permitir uso de async/await
   }
