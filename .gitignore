@@ -42,3 +42,4 @@ config_firestore.json
 # Ignorar o arquivo .env
 .envconfig_firestore.json
 .env
+.env.developer
