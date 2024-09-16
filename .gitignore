@@ -43,3 +43,5 @@ config_firestore.json
 .envconfig_firestore.json
 .env
 .env.developer
+
+Note.txt
