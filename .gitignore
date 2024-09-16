@@ -35,3 +35,9 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 .history/
+
+# Ignorar o arquivo config_firestore.json
+config_firestore.json
+
+# Ignorar o arquivo .env
+.env
