@@ -1,0 +1,138 @@
+npm run start:dev 
+
+#Sync schema with database
+npx prisma db push
+
+#caso precise instalar o prisma client
+npm install @prisma/client
+
+#GERAR ALTERAÇÕES NO PRISMA
+npx prisma generate 
+
+#visualizar os dados
+npx prisma studio
+
+#gerar os arquivos nest
+npx nest g res consignataria
+
+#Rodando comandos
+npm run command simulate-consigov 
+
+
+username = developer
+password = mJ3N16208yc74khz hide
+host = mongodb+srv://db-mongodb-nyc1-01872-ac6527c7.mongo.ondigitalocean.com
+database = server
+ 
+ mongodb+srv://developer:mJ3N16208yc74khz@db-mongodb-nyc1-01872-ac6527c7.mongo.ondigitalocean.com/server?tls=true&authSource=admin&replicaSet=db-mongodb-nyc1-01872
+
+//DOMINIO DEVELOPER
+# http://developer.consigov.com
+
+git push origin main
+
+git push backup main
+
+git pull backup main
+
+git push origin main
+
+
+****** AJUSTE DE ETAPAS PARA O DEPLOYMENT ********
+
+ empresaId = cltghrgx9000112nk3akgv01d
+
+//PROCESSAR SERVIDORES  
+### 
+PATCH http://localhost:3000/validate-carga/cltghrgx9000112nk3akgv01d/processa-servidores 
+Content-Type: application/json
+
+//UPDATE SERVIDORES CARAGA_INICIAL 
+### 
+PATCH http://localhost:3000/validate-carga/cltghrgx9000112nk3akgv01d/update-servidores
+Content-Type: application/json
+
+
+//UPDATE CONSIGNATARIAS CARAGA_INICIAL 
+### 
+PATCH http://localhost:3000/validate-carga/cltghrgx9000112nk3akgv01d/update-consignatarias
+Content-Type: application/json
+
+
+//DELETAR CONTRATOS ANTIGOS IMPORTADOS  
+### 
+DELETE http://localhost:3000/validate-carga/cltghrgx9000112nk3akgv01d/delete-contratos
+Content-Type: application/json
+
+
+//DELETAR TODAS NOTIFICACOES
+###
+DELETE http://localhost:3000/notificacao/all/cltghrgx9000112nk3akgv01d
+
+
+//CREATE CONTRATOS - NOVAS AVERBACOES 
+### 
+PATCH http://localhost:3000/validate-carga/cltghrgx9000112nk3akgv01d/processa-contratos
+Content-Type: application/json
+
+
+
+
+****** AJUSTE DE ETAPAS PARA O MARGEM ********
+
+//ETAPA 1 - PROCESSAR SERVIDORES  
+### 
+PATCH http://localhost:3000/validate-carga/clukjlqxp0000ik9inf67gl1f/processa-servidores-margem
+Content-Type: application/json
+
+
+//ETAPA 2 - ATUALIZAR DADOS DOS SERVIDORES
+
+### 
+PATCH http://localhost:3000/validate-carga/clukjlqxp0000ik9inf67gl1f/processa-update-info-servidor-basic
+Content-Type: application/json
+ 
+
+//ETAPA 3 - PROCESSAR ORGAO, REGIME E CARGOS
+
+###
+PATCH http://localhost:3000/validate-carga/clukjlqxp0000ik9inf67gl1f/processa-cargo
+Content-Type: application/json
+
+
+###
+PATCH http://localhost:3000/validate-carga/clukjlqxp0000ik9inf67gl1f/processa-regime
+Content-Type: application/json
+
+
+###
+PATCH http://localhost:3000/validate-carga/clukjlqxp0000ik9inf67gl1f/processa-orgao
+Content-Type: application/json
+
+
+
+//ETAPA 4 - ATUALIZAR DADOS DOS SERVIDORES -  ORGAO REGIME E CARGO
+
+### 
+PATCH http://localhost:3000/validate-carga/clukjlqxp0000ik9inf67gl1f/processa-update-info-servidor-advanced
+Content-Type: application/json
+
+
+
+//codigo faltando orgao
+1, 2, 3,4,5
+
+
+content.js:199 
+ GET http://localhost:3007/auth/callback/highLightTitle.png 404 (Not Found)
+content.js:200 Unable to load image blob:http://localhost:3007/5f70a35a-970b-4a82-866d-e5c23f571a6a
+scheduler.development.js:517 
+
+ 
+
+Remover os arquivos sensíveis do histórico do Git: Como esses arquivos já foram
+git rm --cached config_firestore.json
+git rm --cached .env
+
+
+   
