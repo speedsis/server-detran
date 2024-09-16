@@ -37,16 +37,12 @@ lerna-debug.log*
 .history/
 
 # Ignorar o arquivo config_firestore.json
-config_firestore.json
+# config_firestore.json
 
-# Ignorar o arquivo .env
-.envconfig_firestore.json
-.env
-.env.developer
-
-Note.txtconfig_firestore.json
-.env
-Note.txt
-.env
+# Ignorar o arquivo .env  
+# config_firestore.json
+# .env
+# .env.developer 
+# Note.txt
 config_firestore.json
-Note.txt
+.env
