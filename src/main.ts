@@ -7,6 +7,7 @@ import { json as expressJson, urlencoded as expressUrlEncoded } from 'express';
 import * as Sentry from '@sentry/node';
 import { prisma } from './lib/data/prisma';
 import { ValidationPipe } from '@nestjs/common';
+import { IoAdapter } from '@nestjs/platform-socket.io';
 // import * as dotenv from 'dotenv';
 // import * as fs from 'fs';
 
@@ -28,6 +29,14 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
 
   // app.use(express.json({ limit: '5mb' })); // Ajuste o limite conforme necessário
+  // Configuração CORS para aceitar conexões WebSocket
+  app.enableCors({
+    origin: '*', // Ajuste conforme necessário
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type, Accept',
+  });
+
+  app.useWebSocketAdapter(new IoAdapter(app)); // Usar o adapter do Socket.IO
 
   app.useGlobalPipes(
     new ValidationPipe({

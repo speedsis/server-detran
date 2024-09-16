@@ -19,7 +19,7 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJXSklFWD
  
 
 ###
-POST http://localhost:3000/ocorrencia/send-data
+POST https://detran-server-146b2f942a9b.herokuapp.com/ocorrencia/send-data
 Content-Type: application/json
 
 [
@@ -31,7 +31,7 @@ Content-Type: application/json
     "horario": "03:00:00",
     "uf": "PA",
     "br": "316.0",
-    "municipio": "BELEM - MAX TESTE",
+    "municipio": "BELEM - MAX ALLY ARTHUR",
     "causa_principal": "Sim",
     "causa_acidente": "Ausência de reação do condutor",
     "ordem_tipo_acidente": "5",
@@ -55,8 +55,8 @@ Content-Type: application/json
     "feridos_leves": "0",
     "feridos_graves": "1",
     "mortos": "0",
-    "latitude": "-1,308708",
-    "longitude": "-48,458179",
+    "latitude": "-1,307739",
+    "longitude": "-48,456257",
     "regional": "SPRF-PA",
     "delegacia": "DEL01-PA",
     "uop": "UOP02-DEL01-PA"
@@ -64,3 +64,94 @@ Content-Type: application/json
 ]
 
  
+###
+GET http://localhost:3000/orders
+Content-Type: application/json
+
+
+###
+GET http://localhost:3001/orders/
+ 
+###
+POST http://localhost:3000/orders/insert
+Content-Type: application/json
+ 
+  {
+  "userId": "dQXvXosIITgZ5rNi9WKatrfp8Jo2",
+  "orderId": "SUa5VbtjsEDYFNP1fEVI",
+  "pickupOption": "delivery",
+  "userNote": "speed",
+  "previousDeliveryStatus": "pending",
+  "date": 1642301191141,
+  "deliveryGeoPoint": {
+    "latitude": -1.33156541,
+    "longitude": -48.4511443
+  },
+  "deliveryStatus": "upcoming",
+  "deliveryId": "dQXvXosIITgZ5rNi9WKatrfp8Jo2",
+  "employeeCancelNote": "resolvido confronto",
+  "geoPoint": {
+    "latitude": -1.3158079,
+    "longitude": -48.4538307
+  },
+  "paymentMethod": "cash",
+  "addressModel": {
+    "mobile": "5591986279449",
+    "city": "Belem",
+    "state": "Para",
+    "street": "66820000",
+    "geoPoint": {
+      "latitude": -1.30841834,
+      "longitude": -48.45979975
+    }
+  },
+  "userName": "Alef Cardoso",
+  "userPhone": "5591986279449",
+  "userImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEv08pexApCUUshd5SqxfQFxEi7UocTNsAkw&s"
+}
+
+#  -1.3155297005003876, -48.4541027457639
+
+ 
+# [1.3157402° S, 48.4538057° W]
+
+###
+GET http://localhost:3000/api/test/get-db
+
+
+ 
+###
+POST http://localhost:3000/calls/insert
+Content-Type: application/json
+
+{
+  "id": "13",
+  "time": "2024-09-12T00:00:00.000Z",
+  "transcript": [
+    { "role": "assistant", "content": "190, qual sua emergência?" },
+    { "role": "user", "content": "ouve um acidente em frente a minha residência!" },
+    { "role": "assistant", "content": "Entendi, qual o endereço?" },
+    { "role": "user", "content": "Av. Augusto Monte Negro, 11200, Condominio João Coelho" }
+  ],
+  "emotions": [
+    { "emotion": "medo", "intensity": 0.8 },
+    { "emotion": "estresse", "intensity": 0.9 },
+    { "emotion": "urgência", "intensity": 0.95 }
+  ],
+  "phone": "555-123-4567",
+  "recommendation": "isolamento do local.",
+  "street_view": "https://firebasestorage.googleapis.com/v0/b/segup-e4345.appspot.com/o/users%2FdQXvXosIITgZ5rNi9WKatrfp8Jo2%2FSinistro_BR_393_RJ_1_IML_2.jpg?alt=media&token=6ab36a2a-663e-4f8a-a9b5-b0dc204236bd",
+  "severity": "MODERADO",
+  "type": "acidente",
+  "name": "Fulano de ananindeua",
+  "title": "Teste imagem",
+  "summary": "Relatado acidente de veiculo sem vítima.",
+  "location_name": "Av. Augusto Monte Negro, 11200, Condominio João Coelho",
+  "location_coords": {
+    "lat": -1.35989853,
+    "lng": -48.426942
+  }
+}
+
+###
+GET http://localhost:3000/calls/

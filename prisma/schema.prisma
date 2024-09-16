@@ -38,7 +38,7 @@ model Empresa {
 
 model Ocorrencia {
   id                       String                    @id @default(cuid()) @map("_id")
-  pesid                    String
+  pesid                    String  
   data_inversa             DateTime
   dia_semana               String
   horario                  String
@@ -50,26 +50,26 @@ model Ocorrencia {
   ordem_tipo_acidente      String
   tipo_acidente            String
   classificacao_acidente   String
-  fase_dia                 String
+  fase_dia                 String   
   sentido_via              String
   condicao_metereologica   String
   tipo_pista               String
   tracado_via              String
   uso_solo                 String
-  id_veiculo               String
-  tipo_veiculo             String
-  marca                    String
-  ano_fabricacao_veiculo   Int
-  tipo_envolvido           String
+  id_veiculo               String   
+  tipo_veiculo             String   
+  marca                    String   
+  ano_fabricacao_veiculo   Int      
+  tipo_envolvido           String  
   estado_fisico            String
   idade                    String
-  sexo                     String
+  sexo                     String   
   ilesos                   String
   feridos_leves            String
   feridos_graves           String
   mortos                   String
-  latitude                 Float
-  longitude                Float
+  latitude                 Float    
+  longitude                Float    
   regional                 String
   delegacia                String
   uop                      String

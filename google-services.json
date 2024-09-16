@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "419057906087",
+    "firebase_url": "https://segup-e4345-default-rtdb.firebaseio.com",
+    "project_id": "segup-e4345",
+    "storage_bucket": "segup-e4345.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:419057906087:android:35536f98f56acc34148682",
+        "android_client_info": {
+          "package_name": "com.citizen_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-BWBsLj2qAYH07zqdG5dfoUIlzz1FJWA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:419057906087:android:aa8354b2b02ed54f148682",
+        "android_client_info": {
+          "package_name": "com.security_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-BWBsLj2qAYH07zqdG5dfoUIlzz1FJWA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
