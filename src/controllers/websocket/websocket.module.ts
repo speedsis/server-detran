@@ -9,5 +9,6 @@ import { FirestoreModule } from '../firestore/firestore.module';
   imports: [HttpModule, FirestoreModule], // Adicione HttpModule aqui
   providers: [WebSocketService, WebSocketGatewayService],
   controllers: [WebSocketController], // Adicionar o controlador aqui
+  exports: [WebSocketService, WebSocketGatewayService],
 })
 export class WebSocketModule {}

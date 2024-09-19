@@ -120,12 +120,6 @@ export class WebSocketGatewayService
     }
   }
 
-  // @SubscribeMessage('transfer')
-  // handleTransfer(client: Socket, data: { id: string }) {
-  //   this.logger.log(`Transfer request received for ID: ${data.id}`);
-  //   // Process transfer and potentially send a response
-  // }
-
   @SubscribeMessage('transfer')
   handleTransfer(client: Socket, payload: { id: string }): void {
     console.log('Received transfer event with ID:', payload.id);

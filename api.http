@@ -19,50 +19,53 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJXSklFWD
  
 
 ###
-POST https://detran-server-146b2f942a9b.herokuapp.com/ocorrencia/send-data
+POST http://localhost:3000/ocorrencia/send-data
 Content-Type: application/json
 
-[
-  {
-    "id": "496539",
-    "pesid": "1082245.0",
-    "data_inversa": "2023-12-05",
-    "dia_semana": "terca",
-    "horario": "03:00:00",
-    "uf": "PA",
-    "br": "316.0",
-    "municipio": "BELEM - MAX ALLY ARTHUR",
-    "causa_principal": "Sim",
-    "causa_acidente": "Ausência de reação do condutor",
-    "ordem_tipo_acidente": "5",
-    "tipo_acidente": "Tombamento",
-    "classificacao_acidente": "Com Vítimas LEVES",
-    "fase_dia": "Plena Noite",
-    "sentido_via": "Crescente",
-    "condicao_metereologica": "Céu Claro",
-    "tipo_pista": "Simples",
-    "tracado_via": "Reta",
-    "uso_solo": "Não",
-    "id_veiculo": "872999",
-    "tipo_veiculo": "Motocicleta",
-    "marca": "GOL",
-    "ano_fabricacao_veiculo": 2023,
-    "tipo_envolvido": "Condutor",
-    "estado_fisico": "Lesões Graves",
-    "idade": "38.0",
-    "sexo": "Masculino",
-    "ilesos": "0",
-    "feridos_leves": "0",
-    "feridos_graves": "1",
-    "mortos": "0",
-    "latitude": "-1,307739",
-    "longitude": "-48,456257",
-    "regional": "SPRF-PA",
-    "delegacia": "DEL01-PA",
-    "uop": "UOP02-DEL01-PA"
-  }
-]
+  { "pesid":"20241523","data_inversa":"18/09/2024","dia_semana":"quinta","horario":"10:00","uf":"PA","br":"163","municipio":"Belém","causa_principal":"Não especificada","causa_acidente":"Não especificada","ordem_tipo_acidente":"5","tipo_acidente":"A","classificacao_acidente":"Não especificada","fase_dia":"Desconhecida","sentido_via":"Desconhecido","condicao_metereologica":"Chuva","tipo_pista":"1","tracado_via":"2","uso_solo":"Não especificado","id_veiculo":"0","tipo_veiculo":"Não especificado","marca":"Não especificada","ano_fabricacao_veiculo":0,"tipo_envolvido":"Não especificado","estado_fisico":"Desconhecido","idade":"0","sexo":"Não especificado","ilesos":"0","feridos_leves":"1","feridos_graves":"0","mortos":"0","latitude":"-1.3158034","longitude":"-48.4538276","regional":"Desconhecida","delegacia":"Desconhecida","uop":"Desconhecida"}
 
+ 
+
+
+
+# {
+#     "id": "496539",
+#     "pesid": "1082245.0",
+#     "data_inversa": "2023-12-05",
+#     "dia_semana": "terca",
+#     "horario": "03:00:00",
+#     "uf": "PA",
+#     "br": "316.0",
+#     "municipio": "BELEM - MAX ALLY ARTHUR",
+#     "causa_principal": "Sim",
+#     "causa_acidente": "Ausência de reação do condutor",
+#     "ordem_tipo_acidente": "5",
+#     "tipo_acidente": "Tombamento",
+#     "classificacao_acidente": "Com Vítimas LEVES",
+#     "fase_dia": "Plena Noite",
+#     "sentido_via": "Crescente",
+#     "condicao_metereologica": "Céu Claro",
+#     "tipo_pista": "Simples",
+#     "tracado_via": "Reta",
+#     "uso_solo": "Não",
+#     "id_veiculo": "872999",
+#     "tipo_veiculo": "Motocicleta",
+#     "marca": "GOL",
+#     "ano_fabricacao_veiculo": 2023,
+#     "tipo_envolvido": "Condutor",
+#     "estado_fisico": "Lesões Graves",
+#     "idade": "38.0",
+#     "sexo": "Masculino",
+#     "ilesos": "0",
+#     "feridos_leves": "0",
+#     "feridos_graves": "1",
+#     "mortos": "0",
+#     "latitude": "-1,307739",
+#     "longitude": "-48,456257",
+#     "regional": "SPRF-PA",
+#     "delegacia": "DEL01-PA",
+#     "uop": "UOP02-DEL01-PA"
+#   }
  
 ###
 GET http://localhost:3000/orders

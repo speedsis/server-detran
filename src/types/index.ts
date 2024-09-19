@@ -1,6 +1,6 @@
 import {
   type Note,
-  CustomRole,
+  Ocorrencia,
   Servidor,
   Notification,
   ApiToken,
@@ -23,6 +23,12 @@ export type NotificationCall = Notification & {
 
 //Note
 export type NoteCall = Note & {
+  // assignedUnit: Pick<Prisma.Citizen, "name" | "surname" | "id"> | null;
+  // creator: Pick<Prisma.Citizen, "name" | "surname" | "id"> | null;
+};
+
+//Note
+export type OcorrenciaCall = Ocorrencia & {
   // assignedUnit: Pick<Prisma.Citizen, "name" | "surname" | "id"> | null;
   // creator: Pick<Prisma.Citizen, "name" | "surname" | "id"> | null;
 };
@@ -54,6 +60,8 @@ export type AuditLogData = AuditLog & {
 };
 
 export type NoteData = Note;
+
+export type OcorrenciaData = Ocorrencia;
 
 export type NotificationData = Notification;
 

@@ -1,8 +1,22 @@
 import { Injectable } from '@nestjs/common';
+import { Ocorrencia, Prisma } from '@prisma/client';
 import axios from 'axios';
+
+import { validateSchema } from 'src/lib/data/validate-schema';
+import type * as APITypes from 'src/types/api';
+import { PrismaService } from 'src/prisma/prisma/prisma.service';
+import { CREATE_OCORRENCIA_SCHEMA } from 'src/schemas/basico';
+import { handleValidationError } from 'src/utils/base';
+import { Socket } from 'socket.io';
+import { WebSocketGatewayService } from '../websocket/websocket.gateway';
 
 @Injectable()
 export class OcorrenciaService {
+  constructor(
+    private prismaService: PrismaService,
+    private readonly webSocketGatewayService: WebSocketGatewayService,
+  ) {}
+
   private client_id = 'Dp1Rvkumec7bk33D';
   private client_secret = '840874facf0f4a168e846ec8dff33fa3';
   private url_token = 'https://www.arcgis.com/sharing/rest/oauth2/token';
@@ -24,7 +38,114 @@ export class OcorrenciaService {
     return response.data.access_token;
   }
 
-  async sendData(data: any): Promise<any> {
+  // utils/conversionUtils.ts
+
+  // Função para converter um valor para Float
+  convertToFloat(value: any): number | null {
+    // Se o valor for uma string
+    if (typeof value === 'string') {
+      // Substitui vírgulas por pontos e tenta converter para Float
+      return parseFloat(value.replace(',', '.'));
+    }
+
+    // Se o valor for um número
+    if (typeof value === 'number') {
+      // Retorna o valor
+      return value;
+    }
+
+    // Se não for possível converter, retorna nulo
+    return null;
+  }
+
+  //FindAll Ocorrencia
+  async findAll(
+    includingEnded = false,
+    skip = 0,
+    includeAll = false,
+    query = '',
+    empresaId: string, // Adicione empresaId como parâmetro
+  ): Promise<APITypes.GetOcorrenciaCallsData> {
+    const where: Prisma.OcorrenciaWhereInput = {
+      AND: [
+        query
+          ? {
+              OR: [{ id: { contains: query, mode: 'insensitive' } }],
+            }
+          : {}, // Adicione a condição do query apenas se estiver presente
+      ],
+    };
+
+    const [totalCount, calls] = await this.prismaService.$transaction([
+      this.prismaService.ocorrencia.count({ where }),
+      this.prismaService.ocorrencia.findMany({
+        where,
+        skip: Number(skip), // Convertendo 'skip' para um número
+        take: includeAll ? undefined : 10,
+        orderBy: {
+          id: 'desc', // Ordena por id de forma descendente
+        },
+      }),
+    ]);
+
+    return {
+      totalCount,
+      calls,
+    };
+  }
+
+  async create(data: any): Promise<any> {
+    try {
+      // Converter e atribuir latitude e longitude, mantendo fallback para 0.0 em caso de falha
+      data.latitude = this.convertToFloat(data.latitude) ?? 0.0;
+      data.longitude = this.convertToFloat(data.longitude) ?? 0.0;
+
+      // Converter a data_inversa de "dd/MM/yyyy" para Date
+      if (data.data_inversa && typeof data.data_inversa === 'string') {
+        // Função para converter data no formato "dd/MM/yyyy" para Date
+        const [day, month, year] = data.data_inversa.split('/').map(Number);
+        if (day && month && year) {
+          data.data_inversa = new Date(year, month - 1, day).toISOString(); // Converte para o formato ISO 8601
+        } else {
+          throw new Error('Invalid date format');
+        }
+      }
+
+      // Validação do esquema Zod
+      const base = validateSchema(CREATE_OCORRENCIA_SCHEMA.partial(), data);
+
+      // Transação Prisma
+      const result = await this.prismaService.$transaction(async (prisma) => {
+        // Criação da Ocorrência
+        const ocorrenciaResult = await prisma.ocorrencia.create({
+          data: {
+            ...(base as Prisma.OcorrenciaCreateInput),
+          },
+        });
+
+        // Enviar os dados da ocorrência criada para ArcGIS
+        // await this.sendDataArcGis(ocorrenciaResult);
+
+        // Retornar o resultado da transação
+        return ocorrenciaResult;
+      });
+
+      this.webSocketGatewayService.server.emit('transfer_response', {
+        status: 'success',
+        id: result.id,
+      });
+
+      return result;
+    } catch (error) {
+      console.error(
+        'Erro ao criar ocorrência ou enviar dados ao ArcGIS:',
+        error,
+      );
+      handleValidationError(error); // Tratamento do erro
+    }
+  }
+
+  async sendDataArcGis(data: any): Promise<any> {
     const token = await this.getToken();
     const geojsonData = this.formatGeoJSON(data);
 
@@ -41,12 +162,12 @@ export class OcorrenciaService {
       throw new Error(response.data.error.message);
     }
 
-    console.log(response.data);
+    console.log('Dados enviados ao ArcGIS com sucesso:', data);
 
-    return response.data;
+    return data;
   }
 
-  private formatGeoJSON(data: any): any[] {
+  private formatGeoJSON(data: any): Ocorrencia {
     return data.map((item: any) => ({
       attributes: {
         id: item.id.toString(),

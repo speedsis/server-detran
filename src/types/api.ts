@@ -17,6 +17,12 @@ export interface GetNoteCallsData {
   totalCount: number;
 }
 
+//Note
+export interface GetOcorrenciaCallsData {
+  calls: Types.OcorrenciaCall[];
+  totalCount: number;
+}
+
 //User
 export interface GetUserCallsData {
   calls: Types.UserCall[];
@@ -62,6 +68,17 @@ export type PostNoteData = Types.NoteData;
 export type UpdateNoteData = Types.NoteData;
 
 export type DeleteNoteData = Types.NoteData;
+
+/**
+ * @method POST
+ * @route /ocorrencia
+ */
+
+export type PostOcorrenciaData = Types.OcorrenciaData;
+
+export type UpdateOcorrenciaData = Types.OcorrenciaData;
+
+export type DeleteOcorrenciaData = Types.OcorrenciaData;
 
 /**
  * @method POST

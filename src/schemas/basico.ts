@@ -79,3 +79,48 @@ export const CREATE_PERFIL_ACESSO_SCHEMA = z.object({
   descricao: z.string(),
   userId: z.string().optional(),
 });
+
+export const CREATE_OCORRENCIA_SCHEMA = z.object({
+  id: z.string(),
+  pesid: z.string().optional(),
+  data_inversa: z.preprocess((arg) => {
+    // Verifica se o valor é uma instância de Date, e se for, converte para string ISO
+    if (arg instanceof Date) {
+      return arg.toISOString();
+    }
+    return arg; // Deixa o valor como está se não for Date
+  }, z.string().optional()), // Valida como string após o preprocessamento
+  dia_semana: z.string().optional(),
+  horario: z.string().optional(),
+  uf: z.string().optional(),
+  br: z.string().optional(),
+  municipio: z.string().optional(),
+  causa_principal: z.string().optional(),
+  causa_acidente: z.string().optional(),
+  ordem_tipo_acidente: z.string().optional(),
+  tipo_acidente: z.string().optional(),
+  classificacao_acidente: z.string().optional(),
+  fase_dia: z.string().optional(),
+  sentido_via: z.string().optional(),
+  condicao_metereologica: z.string().optional(),
+  tipo_pista: z.string().optional(),
+  tracado_via: z.string().optional(),
+  uso_solo: z.string().optional(),
+  id_veiculo: z.string().optional(),
+  tipo_veiculo: z.string().optional(),
+  marca: z.string().optional(),
+  ano_fabricacao_veiculo: z.number(),
+  tipo_envolvido: z.string().optional(),
+  estado_fisico: z.string().optional(),
+  idade: z.string().optional(),
+  sexo: z.string().optional(),
+  ilesos: z.string().optional(),
+  feridos_leves: z.string().optional(),
+  feridos_graves: z.string().optional(),
+  mortos: z.string().optional(),
+  latitude: z.number().optional(),
+  longitude: z.number().optional(),
+  regional: z.string().optional(),
+  delegacia: z.string().optional(),
+  uop: z.string().optional(),
+});
