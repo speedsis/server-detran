@@ -9,11 +9,14 @@ import { CREATE_OCORRENCIA_SCHEMA } from 'src/schemas/basico';
 import { handleValidationError } from 'src/utils/base';
 import { Socket } from 'socket.io';
 import { WebSocketGatewayService } from '../websocket/websocket.gateway';
+import { FirebaseService } from 'src/services/firebase.service';
+import { collection, doc, runTransaction } from 'firebase/firestore';
 
 @Injectable()
 export class OcorrenciaService {
   constructor(
     private prismaService: PrismaService,
+    private readonly firebaseService: FirebaseService,
     private readonly webSocketGatewayService: WebSocketGatewayService,
   ) {}
 
@@ -122,42 +125,61 @@ export class OcorrenciaService {
         data.data_inversa = date.toISOString(); // Converte para o formato ISO 8601
       }
 
-      // // Verifica e converte a data_inversa de ISO 8601 para Date
-      // if (data.data_inversa && typeof data.data_inversa === 'string') {
-      //   // Tenta criar uma data a partir do formato ISO 8601
-      //   const isoDate = new Date(data.data_inversa);
-
-      //   // Verifica se a data é válida
-      //   if (isNaN(isoDate.getTime())) {
-      //     throw new Error('Invalid date format: Could not parse ISO date');
-      //   }
-
-      //   data.data_inversa = isoDate.toISOString(); // Confirma que está no formato ISO 8601
-      // }
-
       // Validação do esquema Zod
       const base = validateSchema(CREATE_OCORRENCIA_SCHEMA.partial(), data);
 
+      // Pegar a instância do Firestore através do serviço injetado
+      const firestore = this.firebaseService.getFirestoreInstance();
+
       // Transação Prisma
       const result = await this.prismaService.$transaction(async (prisma) => {
-        // Criação da Ocorrência
+        // 1. Criar a Ocorrência no Banco de dados  (coleção 'ocorrencias')
         const ocorrenciaResult = await prisma.ocorrencia.create({
           data: {
             ...(base as Prisma.OcorrenciaCreateInput),
           },
         });
 
-        // Enviar os dados da ocorrência criada para ArcGIS
-        // await this.sendDataArcGis(ocorrenciaResult);
+        // Iniciar a transação no Firestore
+        await runTransaction(firestore, async (transaction) => {
+          // 2. Criar a Ocorrência no Firestore (coleção 'ocorrencias')
+          const ocorrenciaRef = doc(collection(firestore, 'ocorrencias'));
+          transaction.set(ocorrenciaRef, {
+            ...(base as any), // dados da ocorrência convertidos
+            createdAt: new Date(),
+          });
+
+          // 3. Atualizar o estado da Order no Firestore (coleção 'orders')
+          const orderRef = doc(firestore, 'orders', data.orderId);
+          transaction.update(orderRef, {
+            deliveryStatus: 'delivered',
+          });
+
+          // 4. Atualizar o estado da CALL no Firestore (coleção 'calls')
+          const callRef = doc(firestore, 'calls', data.callsId);
+          transaction.update(callRef, {
+            severity: 'RESOLVIDO',
+          });
+
+          // 5. Atualizar o estado do agente em Users (coleção 'users')
+          const userRef = doc(firestore, 'users', data.userId);
+          transaction.update(userRef, {
+            orderId: '', // Limpar o campo orderId
+            statusModel: {
+              id: '10-8',
+              descricao: '10-8 em serviço',
+            },
+          });
+        });
 
         // Retornar o resultado da transação
         return ocorrenciaResult;
       });
 
-      this.webSocketGatewayService.server.emit('transfer_response', {
-        status: 'success',
-        id: result.id,
-      });
+      // this.webSocketGatewayService.server.emit('transfer_response', {
+      //   status: 'success',
+      //   id: result.id,
+      // });
 
       return result;
     } catch (error) {

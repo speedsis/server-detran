@@ -39,6 +39,9 @@ model Empresa {
 model Ocorrencia {
   id                       String                    @id @default(cuid()) @map("_id")
   pesid                    String  
+  callsId                  String?
+  orderId                  String?
+  userId                   String?
   data_inversa             DateTime
   dia_semana               String
   horario                  String

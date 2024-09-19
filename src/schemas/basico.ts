@@ -83,6 +83,9 @@ export const CREATE_PERFIL_ACESSO_SCHEMA = z.object({
 export const CREATE_OCORRENCIA_SCHEMA = z.object({
   id: z.string(),
   pesid: z.string().optional(),
+  callsId: z.string().optional(),
+  orderId: z.string().optional(),
+  userId: z.string().optional(),
   data_inversa: z.preprocess((arg) => {
     // Verifica se o valor é uma instância de Date, e se for, converte para string ISO
     if (arg instanceof Date) {

@@ -22,9 +22,51 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJXSklFWD
 POST http://localhost:3000/ocorrencia/send-data
 Content-Type: application/json
 
-  { "pesid":"20241523","data_inversa":"18/09/2024","dia_semana":"quinta","horario":"10:00","uf":"PA","br":"163","municipio":"Belém","causa_principal":"Não especificada","causa_acidente":"Não especificada","ordem_tipo_acidente":"5","tipo_acidente":"A","classificacao_acidente":"Não especificada","fase_dia":"Desconhecida","sentido_via":"Desconhecido","condicao_metereologica":"Chuva","tipo_pista":"1","tracado_via":"2","uso_solo":"Não especificado","id_veiculo":"0","tipo_veiculo":"Não especificado","marca":"Não especificada","ano_fabricacao_veiculo":0,"tipo_envolvido":"Não especificado","estado_fisico":"Desconhecido","idade":"0","sexo":"Não especificado","ilesos":"0","feridos_leves":"1","feridos_graves":"0","mortos":"0","latitude":"-1.3158034","longitude":"-48.4538276","regional":"Desconhecida","delegacia":"Desconhecida","uop":"Desconhecida"}
+ { 
+ "pesid":"202410124",
+ "callsId":"HtyQHSBoi3mrmSA7DbP4",
+ "orderId":"bs0SQvAheYpqGGeL2L9Y",
+ "userId":"dQXvXosIITgZ5rNi9WKatrfp8Jo2",
+ "data_inversa":"19/09/2024",
+ "dia_semana":"quinta",
+ "horario":"10:00",
+ "uf":"PA",
+ "br":"163",
+ "municipio":"Belém",
+ "causa_principal":"Não especificada",
+ "causa_acidente":"Não especificada",
+ "ordem_tipo_acidente":"5",
+ "tipo_acidente":"A",
+ "classificacao_acidente":"Não especificada",
+ "fase_dia":"Desconhecida",
+ "sentido_via":"Desconhecido",
+ "condicao_metereologica":"Chuva",
+ "tipo_pista":"3",
+ "tracado_via":"3",
+ "uso_solo":"Não especificado",
+ "id_veiculo":"0",
+ "tipo_veiculo":"Não especificado",
+ "marca":"Não especificada",
+ "ano_fabricacao_veiculo":0,
+ "tipo_envolvido":"Não especificado",
+ "estado_fisico":"Desconhecido",
+ "idade":"0",
+ "sexo":"Não especificado",
+ "ilesos":"0",
+ "feridos_leves":"1",
+ "feridos_graves":"0",
+ "mortos":"0",
+ "latitude":-1.3158069,
+ "longitude":-48.4538295,
+ "regional":"Desconhecida",
+ "delegacia":"Desconhecida",
+ "uop":"Desconhecida"
+ }
 
  
+
+#  {status: OcorrenciaStatus.initial, errorMessage: null, currentWidget: 2, title: null, id: null, psid: 2whNiJUVhPrBDwh9WJBh, uf: null, municipio: null, br: null, descricao: null, diasemana: null, horario: null, sentidovia: null, fasedia: null, usosolo: null, qtveicsemdano: null, flagferidos: null, flagboletim: null, flagtestemunhas: null, flagnolocal: true, flagdanopatrimonio: null, locespecifico: SAIDA OU ENTRADA DE VEÍCULO, tipopista: 3, tracadovia: 3, sinalizacao: 2, fatoresContribuintes: [Falta de sinalização], codboletin: 2024158, datainversa: 19/09/2024, hocorrencia: 12:00, hchegada: 12:15, htermino: 12:30, tipoacidente: A, condicaometereologica: Chuva, locdescricao: null, qtveicevadido: null, flagmaoridade: null, flagprodperigoso: null, flagrodfederal: null, flagdentroestado: null, flagdanomeioambiente: null, regional: null, delegacia: null, uop: null, ilesos: null, feridosleve: null, feridosgrave: null, obitos: null, classificacao: null, qtdenvolvido: null, qtveiculos: nu
+
 
 
 

@@ -38,6 +38,10 @@ export class FirebaseService {
     this.firestore = getFirestore(app); // Usando a função getFirestore
   }
 
+  getFirestoreInstance(): Firestore {
+    return this.firestore; // Retorna a instância do Firestore
+  }
+
   // Função auxiliar para transformar um objeto com latitude e longitude em GeoPoint
   // private convertToGeoPoint(location: { lat: number; lng: number }) {
   //   return new GeoPoint(location.lat, location.lng);
