@@ -100,18 +100,40 @@ export class OcorrenciaService {
       data.latitude = this.convertToFloat(data.latitude) ?? 0.0;
       data.longitude = this.convertToFloat(data.longitude) ?? 0.0;
 
-      // Verifica e converte a data_inversa de ISO 8601 para Date
+      // Converter a data_inversa de "dd/MM/yyyy" para Date
       if (data.data_inversa && typeof data.data_inversa === 'string') {
-        // Tenta criar uma data a partir do formato ISO 8601
-        const isoDate = new Date(data.data_inversa);
+        // Função para converter data no formato "dd/MM/yyyy" para Date
+        const [day, month, year] = data.data_inversa.split('/').map(Number);
 
-        // Verifica se a data é válida
-        if (isNaN(isoDate.getTime())) {
-          throw new Error('Invalid date format: Could not parse ISO date');
+        if (!day || !month || !year) {
+          throw new Error('Invalid date format: Missing day, month, or year');
         }
 
-        data.data_inversa = isoDate.toISOString(); // Confirma que está no formato ISO 8601
+        // Verifica se a data é válida
+        const date = new Date(year, month - 1, day);
+        if (
+          date.getDate() !== day ||
+          date.getMonth() !== month - 1 ||
+          date.getFullYear() !== year
+        ) {
+          throw new Error('Invalid date format: Date out of range');
+        }
+
+        data.data_inversa = date.toISOString(); // Converte para o formato ISO 8601
       }
+
+      // // Verifica e converte a data_inversa de ISO 8601 para Date
+      // if (data.data_inversa && typeof data.data_inversa === 'string') {
+      //   // Tenta criar uma data a partir do formato ISO 8601
+      //   const isoDate = new Date(data.data_inversa);
+
+      //   // Verifica se a data é válida
+      //   if (isNaN(isoDate.getTime())) {
+      //     throw new Error('Invalid date format: Could not parse ISO date');
+      //   }
+
+      //   data.data_inversa = isoDate.toISOString(); // Confirma que está no formato ISO 8601
+      // }
 
       // Validação do esquema Zod
       const base = validateSchema(CREATE_OCORRENCIA_SCHEMA.partial(), data);
