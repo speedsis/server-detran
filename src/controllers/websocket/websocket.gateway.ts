@@ -33,6 +33,7 @@ export class WebSocketGatewayService
   async onModuleInit() {
     this.listenToOrders();
     this.listenToCalls();
+    this.listenToUsers();
   }
 
   // Configurar o listener para a coleção 'orders'
@@ -87,6 +88,32 @@ export class WebSocketGatewayService
     }
   }
 
+  // Configurar o listener para a coleção 'users'
+  private listenToUsers() {
+    const usersCollection = this.firestoreService.getUsersCollection();
+
+    if (usersCollection) {
+      usersCollection.onSnapshot(
+        (snapshot) => {
+          if (this.server) {
+            const users = snapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+            }));
+            this.server.emit('user_update', users); // Emitir evento de atualização de usuários
+          } else {
+            this.logger.error('Server is not initialized.');
+          }
+        },
+        (error) => {
+          this.logger.error('Error listening to Firestore updates:', error);
+        },
+      );
+    } else {
+      this.logger.error('Firestore users collection not found.');
+    }
+  }
+
   // Método que lida com a conexão de um cliente
   handleConnection(client: Socket) {
     this.logger.log(`Client connected: ${client.id}`);
@@ -117,6 +144,18 @@ export class WebSocketGatewayService
       client.emit('get_calls', { event: 'get_calls', data: calls });
     } catch (error) {
       this.logger.error('Error fetching calls data', error.stack);
+    }
+  }
+
+  // Método para lidar com a assinatura WebSocket 'get_users'
+  @SubscribeMessage('get_users')
+  async handleGetUsers(client: Socket) {
+    this.logger.log('Received get_users request');
+    try {
+      const users = await this.websocketService.getUsers();
+      client.emit('get_users', { event: 'get_users', data: users });
+    } catch (error) {
+      this.logger.error('Error fetching users data', error.stack);
     }
   }
 

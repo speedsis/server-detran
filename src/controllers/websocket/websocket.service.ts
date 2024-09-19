@@ -24,4 +24,13 @@ export class WebSocketService {
       .pipe(map((response) => response.data))
       .toPromise(); // Para permitir uso de async/await
   }
+
+  // Método para buscar "users"
+  async getUsers() {
+    this.logger.log('Fetching users...');
+    return this.httpService
+      .get('https://detran-server-146b2f942a9b.herokuapp.com/users')
+      .pipe(map((response) => response.data))
+      .toPromise(); // Para permitir uso de async/await
+  }
 }

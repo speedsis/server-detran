@@ -169,4 +169,26 @@ export class FirebaseService {
       throw new Error('Erro ao inserir pedido');
     }
   }
+
+  // Método para buscar users
+  async getUsers() {
+    const usersCollection = collection(this.firestore, 'users'); // Usando 'collection'
+    const snapshot = await getDocs(usersCollection); // Usando 'getDocs'
+
+    return snapshot.docs.map((doc) => doc.data());
+  }
+
+  // Método para inserir users via POST
+  async addUser(userData: any) {
+    try {
+      const usersCollection = collection(this.firestore, 'users');
+
+      // Inserir o user no Firestore
+      const docRef = await addDoc(usersCollection, userData);
+      return { success: true, id: docRef.id };
+    } catch (error) {
+      console.error('Erro ao inserir user:', error);
+      throw new Error('Erro ao inserir user');
+    }
+  }
 }

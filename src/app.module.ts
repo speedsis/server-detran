@@ -17,6 +17,7 @@ import { OrdersModule } from './controllers/firebase/orders.module';
 import { FirebaseModule } from './controllers/firebase/firebase.module';
 import { WebSocketModule } from './controllers/websocket/websocket.module';
 import { CallsModule } from './controllers/firebase/calls.module';
+import { UsersModule } from './controllers/firebase/users.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { CallsModule } from './controllers/firebase/calls.module';
     PinotModule,
     OrdersModule,
     CallsModule,
+    UsersModule,
     FirebaseModule,
     WebSocketModule,
   ],

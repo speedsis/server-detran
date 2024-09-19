@@ -13,4 +13,8 @@ export class FirestoreService {
   getCallsCollection() {
     return this.firestore.collection('calls');
   }
+
+  getUsersCollection() {
+    return this.firestore.collection('users');
+  }
 }
