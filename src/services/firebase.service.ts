@@ -3,6 +3,8 @@ import { initializeApp } from 'firebase/app';
 import {
   getFirestore,
   collection,
+  runTransaction,
+  doc,
   getDocs,
   addDoc,
   Firestore,
@@ -76,6 +78,8 @@ export class FirebaseService {
   async insertOrder(orderData: any) {
     try {
       const ordersCollection = collection(this.firestore, 'orders');
+      const callsCollection = collection(this.firestore, 'calls');
+      const usersCollection = collection(this.firestore, 'users');
 
       // Convertendo campos de geolocalização para Firebase GeoPoint
       if (orderData.deliveryGeoPoint) {
@@ -94,9 +98,35 @@ export class FirebaseService {
         );
       }
 
-      // Inserir o pedido no Firestore
-      const docRef = await addDoc(ordersCollection, orderData);
-      return { success: true, id: docRef.id };
+      // Iniciar a transação para garantir a integridade dos dados
+      return await runTransaction(this.firestore, async (transaction) => {
+        // Inserir o pedido no Firestore
+        const docRef = await addDoc(ordersCollection, orderData);
+        const orderId = docRef.id;
+
+        // Atualizar o estado da call para "EM ATENDIMENTO"
+        const callRef = doc(callsCollection, orderData.callsId);
+        transaction.update(callRef, {
+          severity: 'EM ATENDIMENTO',
+        });
+
+        // Atualizar o estado do agente para "10-97 em missão" e adicionar o orderId
+        const agentRef = doc(usersCollection, orderData.deliveryId);
+        transaction.update(agentRef, {
+          statusModel: {
+            id: '10-97',
+            descricao: '10-97 em missão',
+          },
+          orderId: orderId,
+        });
+
+        // Retorna sucesso e o id da nova ordem
+        return { success: true, id: orderId };
+      });
+
+      // // Inserir o pedido no Firestore
+      // const docRef = await addDoc(ordersCollection, orderData);
+      // return { success: true, id: docRef.id };
     } catch (error) {
       console.error('Erro ao inserir pedido:', error);
       throw new Error('Erro ao inserir pedido');
