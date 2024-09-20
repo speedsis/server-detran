@@ -65,7 +65,6 @@ export class FirebaseService {
   }
 
   // Outros métodos para interagir com Firebase, como Firestore, Storage, etc.
-
   // Método para buscar pedidos
   async getOrders() {
     const ordersCollection = collection(this.firestore, 'orders'); // Usando 'collection'
@@ -104,14 +103,32 @@ export class FirebaseService {
         const docRef = await addDoc(ordersCollection, orderData);
         const orderId = docRef.id;
 
-        // Atualizar o estado da call para "EM ATENDIMENTO"
+        // Referências dos documentos para a transação
         const callRef = doc(callsCollection, orderData.callsId);
+        const agentRef = doc(usersCollection, orderData.deliveryId);
+
+        // Verificar se o documento da call existe
+        const callDoc = await transaction.get(callRef);
+        if (!callDoc.exists()) {
+          throw new Error(
+            `Documento da call com ID ${orderData.callsId} não encontrado.`,
+          );
+        }
+
+        // Verificar se o documento do agente existe
+        const agentDoc = await transaction.get(agentRef);
+        if (!agentDoc.exists()) {
+          throw new Error(
+            `Documento do agente com ID ${orderData.deliveryId} não encontrado.`,
+          );
+        }
+
+        // Atualizar o estado da call para "EM ATENDIMENTO"
         transaction.update(callRef, {
           severity: 'EM ATENDIMENTO',
         });
 
         // Atualizar o estado do agente para "10-97 em missão" e adicionar o orderId
-        const agentRef = doc(usersCollection, orderData.deliveryId);
         transaction.update(agentRef, {
           statusModel: {
             id: '10-97',
