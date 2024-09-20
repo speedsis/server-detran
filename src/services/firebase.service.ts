@@ -70,7 +70,11 @@ export class FirebaseService {
     const ordersCollection = collection(this.firestore, 'orders'); // Usando 'collection'
     const snapshot = await getDocs(ordersCollection); // Usando 'getDocs'
 
-    return snapshot.docs.map((doc) => doc.data());
+    // Mapeia cada documento e adiciona o campo 'id' ao resultado
+    return snapshot.docs.map((doc) => ({
+      id: doc.id, // Adiciona o ID do documento
+      ...doc.data(), // Adiciona os dados do documento
+    }));
   }
 
   // Método para inserir pedido no Firestore
@@ -177,7 +181,11 @@ export class FirebaseService {
     const callsCollection = collection(this.firestore, 'calls'); // Usando 'collection'
     const snapshot = await getDocs(callsCollection); // Usando 'getDocs'
 
-    return snapshot.docs.map((doc) => doc.data());
+    // Mapeia cada documento e adiciona o campo 'id' ao resultado
+    return snapshot.docs.map((doc) => ({
+      id: doc.id, // Adiciona o ID do documento
+      ...doc.data(), // Adiciona os dados do documento
+    }));
   }
 
   //   // Método para inserir pedidos
@@ -222,7 +230,11 @@ export class FirebaseService {
     const usersCollection = collection(this.firestore, 'users'); // Usando 'collection'
     const snapshot = await getDocs(usersCollection); // Usando 'getDocs'
 
-    return snapshot.docs.map((doc) => doc.data());
+    // Mapeia cada documento e adiciona o campo 'id' ao resultado
+    return snapshot.docs.map((doc) => ({
+      id: doc.id, // Adiciona o ID do documento
+      ...doc.data(), // Adiciona os dados do documento
+    }));
   }
 
   // Método para inserir users via POST
