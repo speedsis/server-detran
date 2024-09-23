@@ -22,46 +22,169 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJXSklFWD
 POST http://localhost:3000/ocorrencia/send-data
 Content-Type: application/json
 
- { 
- "pesid":"202410124",
- "callsId":"HtyQHSBoi3mrmSA7DbP4",
- "orderId":"bs0SQvAheYpqGGeL2L9Y",
- "userId":"dQXvXosIITgZ5rNi9WKatrfp8Jo2",
- "data_inversa":"19/09/2024",
- "dia_semana":"quinta",
- "horario":"10:00",
- "uf":"PA",
- "br":"163",
- "municipio":"Belém",
- "causa_principal":"Não especificada",
- "causa_acidente":"Não especificada",
- "ordem_tipo_acidente":"5",
- "tipo_acidente":"A",
- "classificacao_acidente":"Não especificada",
- "fase_dia":"Desconhecida",
- "sentido_via":"Desconhecido",
- "condicao_metereologica":"Chuva",
- "tipo_pista":"3",
- "tracado_via":"3",
- "uso_solo":"Não especificado",
- "id_veiculo":"0",
- "tipo_veiculo":"Não especificado",
- "marca":"Não especificada",
- "ano_fabricacao_veiculo":0,
- "tipo_envolvido":"Não especificado",
- "estado_fisico":"Desconhecido",
- "idade":"0",
- "sexo":"Não especificado",
- "ilesos":"0",
- "feridos_leves":"1",
- "feridos_graves":"0",
- "mortos":"0",
- "latitude":-1.3158069,
- "longitude":-48.4538295,
- "regional":"Desconhecida",
- "delegacia":"Desconhecida",
- "uop":"Desconhecida"
- }
+{
+  "pesid":"2024156",
+  "orderId":"UKbzfya8pUPbh7Kh48ay",
+  "data_inversa":"22/09/2024",
+  "dia_semana":"quinta",
+  "horario":"10:00",
+  "uf":"PA",
+  "br":"163",
+  "municipio":"Belém",
+  "causa_principal":"Sim",
+  "causa_acidente":"Ausência de reação do condutor",
+  "ordem_tipo_acidente":"5",
+  "tipo_acidente":"A",
+  "classificacao_acidente":"Com Vítimas LEVES",
+  "fase_dia":"Plena Noite",
+  "sentido_via":"Crescente",
+  "condicao_metereologica":"Céu Claro",
+  "tipo_pista":"3",
+  "tracado_via":"3",
+  "uso_solo":"Não",
+  "id_veiculo":"0",
+  "tipo_veiculo":"Não especificado",
+  "marca":"Não especificada",
+  "ano_fabricacao_veiculo":0,
+  "tipo_envolvido":"Condutor",
+  "estado_fisico":"Lesões Graves",
+  "idade":"30.0",
+  "sexo":"Masculino",
+  "ilesos":"0",
+  "feridos_leves":"1",
+  "feridos_graves":"0",
+  "mortos":"0",
+  "latitude":"-1.3158057",
+  "longitude":"-48.4538269",
+  "regional":"BELEM-PA",
+  "delegacia":"DEL01-PA",
+  "uop":"UOP02-DEL01-PA"
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# {
+#   "pesid":"2024103",
+#   "data_inversa":"20/09/2024",
+#   "dia_semana":"quinta",
+#   "horario":"10:00",
+#   "uf":"PA",
+#   "br":"163",
+#   "municipio":"Belém",
+#   "causa_principal":"Sim",
+#   "causa_acidente":"Ausência de reação do condutor",
+#   "ordem_tipo_acidente":"5",
+#   "tipo_acidente":"A",
+#   "classificacao_acidente":"Com Vítimas LEVES",
+#   "fase_dia":"Plena Noite",
+#   "sentido_via":"Crescente",
+#   "condicao_metereologica":"Chuva",
+#   "tipo_pista":"3",
+#   "tracado_via":"3",
+#   "uso_solo":"Não",
+#   "id_veiculo":"0",
+#   "tipo_veiculo":"Não especificado",
+#   "marca":"Não especificada",
+#   "ano_fabricacao_veiculo":0,
+#   "tipo_envolvido":"Condutor",
+#   "estado_fisico":"Lesões Graves",
+#   "idade":"30.0",
+#   "sexo":"Masculino",
+#   "ilesos":"0",
+#   "feridos_leves":"1",
+#   "feridos_graves":"0",
+#   "mortos":"0",
+#   "latitude":"-1.3158027",
+#   "longitude":"-48.4538239",
+#   "regional":"BELEM-PA",
+#   "delegacia":"DEL01-PA",
+#   "uop":"UOP02-DEL01-PA"
+#   }
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#  { 
+#  "pesid":"202410124",
+#  "callsId":"HtyQHSBoi3mrmSA7DbP4",
+#  "orderId":"bs0SQvAheYpqGGeL2L9Y",
+#  "userId":"dQXvXosIITgZ5rNi9WKatrfp8Jo2",
+#  "data_inversa":"19/09/2024",
+#  "dia_semana":"quinta",
+#  "horario":"10:00",
+#  "uf":"PA",
+#  "br":"163",
+#  "municipio":"Belém",
+#  "causa_principal":"Não especificada",
+#  "causa_acidente":"Não especificada",
+#  "ordem_tipo_acidente":"5",
+#  "tipo_acidente":"A",
+#  "classificacao_acidente":"Não especificada",
+#  "fase_dia":"Desconhecida",
+#  "sentido_via":"Desconhecido",
+#  "condicao_metereologica":"Chuva",
+#  "tipo_pista":"3",
+#  "tracado_via":"3",
+#  "uso_solo":"Não especificado",
+#  "id_veiculo":"0",
+#  "tipo_veiculo":"Não especificado",
+#  "marca":"Não especificada",
+#  "ano_fabricacao_veiculo":0,
+#  "tipo_envolvido":"Não especificado",
+#  "estado_fisico":"Desconhecido",
+#  "idade":"0",
+#  "sexo":"Não especificado",
+#  "ilesos":"0",
+#  "feridos_leves":"1",
+#  "feridos_graves":"0",
+#  "mortos":"0",
+#  "latitude":-1.3158069,
+#  "longitude":-48.4538295,
+#  "regional":"Desconhecida",
+#  "delegacia":"Desconhecida",
+#  "uop":"Desconhecida"
+#  }
 
  
 

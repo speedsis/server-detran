@@ -7,10 +7,9 @@ import type * as APITypes from 'src/types/api';
 import { PrismaService } from 'src/prisma/prisma/prisma.service';
 import { CREATE_OCORRENCIA_SCHEMA } from 'src/schemas/basico';
 import { handleValidationError } from 'src/utils/base';
-import { Socket } from 'socket.io';
 import { WebSocketGatewayService } from '../websocket/websocket.gateway';
 import { FirebaseService } from 'src/services/firebase.service';
-import { collection, doc, runTransaction } from 'firebase/firestore';
+import { collection, doc, getDoc, runTransaction } from 'firebase/firestore';
 
 @Injectable()
 export class OcorrenciaService {
@@ -133,10 +132,33 @@ export class OcorrenciaService {
 
       // Transação Prisma
       const result = await this.prismaService.$transaction(async (prisma) => {
-        // 1. Criar a Ocorrência no Banco de dados  (coleção 'ocorrencias')
+        // 1. Consulta a Order no Firestore para obter orderId, callsId e userId
+        const orderDocRef = doc(firestore, 'orders', data.orderId);
+        const orderSnapshot = await getDoc(orderDocRef);
+
+        if (!orderSnapshot.exists()) {
+          throw new Error('Order não encontrada!');
+        }
+
+        // Pega os dados da order
+        const orderData = orderSnapshot.data();
+        const _orderId = orderData.orderId;
+        const _callsId = orderData.callsId;
+        const _userId = orderData.deliveryId;
+
+        if (!_orderId || !_callsId || !_userId) {
+          throw new Error(
+            'Faltam informações na Order para completar a transação!',
+          );
+        }
+
+        // 2. Criar a Ocorrência no Banco de dados  (coleção 'ocorrencias')
         const ocorrenciaResult = await prisma.ocorrencia.create({
           data: {
             ...(base as Prisma.OcorrenciaCreateInput),
+            callsId: _callsId, // Adiciona callsId
+            orderId: _orderId, // Adiciona orderId
+            userId: _userId, // Adiciona userId
           },
         });
 
@@ -147,6 +169,9 @@ export class OcorrenciaService {
           transaction.set(ocorrenciaRef, {
             ...(base as any), // dados da ocorrência convertidos
             createdAt: new Date(),
+            callsId: _callsId, // Adiciona callsId
+            orderId: _orderId, // Adiciona orderId
+            userId: _userId, // Adiciona userId
           });
 
           // 3. Atualizar o estado da Order no Firestore (coleção 'orders')
@@ -156,13 +181,13 @@ export class OcorrenciaService {
           });
 
           // 4. Atualizar o estado da CALL no Firestore (coleção 'calls')
-          const callRef = doc(firestore, 'calls', data.callsId);
+          const callRef = doc(firestore, 'calls', _callsId);
           transaction.update(callRef, {
             severity: 'RESOLVIDO',
           });
 
           // 5. Atualizar o estado do agente em Users (coleção 'users')
-          const userRef = doc(firestore, 'users', data.userId);
+          const userRef = doc(firestore, 'users', _userId);
           transaction.update(userRef, {
             orderId: '', // Limpar o campo orderId
             statusModel: {
