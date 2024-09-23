@@ -18,6 +18,8 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJXSklFWD
 
  
 
+ //
+
 ###
 POST http://localhost:3000/ocorrencia/send-data
 Content-Type: application/json
